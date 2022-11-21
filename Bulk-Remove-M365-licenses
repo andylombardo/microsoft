@@ -1,0 +1,34 @@
+#SKUID for A1 for students: yourtenant:STANDARDWOFFPACK_STUDENT
+
+#SkuID for A1 Plus for students: yourtenant:STANDARDWOFFPACK_IW_STUDENT
+
+#SkuID for A3 for students: yourtenant:M365EDU_A3_STUUSEBNFT
+
+#skuid for A3 for faculty: yourtenant:M365EDU_A3_FACULTY
+
+
+Connect-MsolService
+
+
+
+# csv of users - (UserPrincipalName (email) 
+$inFileName="C:\temp\users.csv"
+
+
+$users=Import-Csv $inFileName
+
+
+ForEach ($user in $users)
+
+{
+
+$user.Userprincipalname
+
+$upn=$user.UserPrincipalName
+
+Set-MsolUserLicense -UserPrincipalName $upn -RemoveLicenses "yourtenant:STANDARDWOFFPACK_IW_STUDENT" -ErrorAction SilentlyContinue
+
+
+
+}
+
